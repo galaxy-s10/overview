@@ -1,0 +1,92 @@
+.tab {
+  position: relative;
+}
+.scrollTab {
+  white-space: nowrap;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0;
+    height: 0;
+  }
+}
+.topTabItem {
+  display: inline-block;
+  margin: 10px;
+}
+.second_tab {
+  position: absolute;
+  left: 0;
+  right: 0;
+  & div:nth-child(1) {
+    @extend .scrollTab;
+  }
+  .second_tab_item {
+    display: inline-block;
+    margin: 10px;
+  }
+}
+
+.card {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding-top: 4px;
+  height: 300px;
+  overflow: scroll;
+  .cardItem {
+    width: 30%;
+    position: relative;
+    text-align: center;
+    margin-top: 10px;
+    .whitebg {
+      background-color: #fff;
+      .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-right: 4px;
+        .tag {
+          // position: absolute;
+          // left: 0;
+          padding: 0 14px;
+          background-color: #eff1f0;
+        }
+        .redDotTip {
+          // right: 0;
+          // position: absolute;
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background-color: red;
+          // margin-right: 5px;
+        }
+      }
+
+      .previewImg {
+        width: 60%;
+        height: 60px;
+      }
+      .onlyNum {
+        color: pink;
+      }
+    }
+    .graybg {
+      background-color: #eff1f0;
+      text-align: center;
+      padding: 4px;
+      .delLine {
+        text-decoration: line-through;
+        color: gray;
+      }
+    }
+    // 最后一行是2个元素
+    &:last-child:nth-child(3n-1) {
+      margin-right: calc(30% + 10% / 3 * 1);
+    }
+    // 最后一行是一个元素
+    &:last-child:nth-child(3n-2) {
+      margin-right: calc(60% + 10% / 3 * 2);
+    }
+  }
+}
