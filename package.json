@@ -9,7 +9,6 @@
     "test:coverage": "umi-test --coverage"
   },
   "gitHooks": {
-    "pre-commit": "lint-staged"
   },
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
@@ -21,6 +20,9 @@
   },
   "dependencies": {
     "@ant-design/pro-layout": "^6.5.0",
+    "mobx": "^6.3.3",
+    "mobx-react": "^7.2.0",
+    "mobx-react-lite": "^3.2.1",
     "react": "17.x",
     "react-dom": "17.x",
     "redux": "^4.1.1",
