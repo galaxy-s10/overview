@@ -11,6 +11,6 @@ export default defineConfig({
     baseNavigator: true,
     baseSeparator: '-',
   },
-  routes: [{ path: '/', component: '@/pages/index' }],
+  // routes: [{ path: '/', component: '@/pages/index' }],
   fastRefresh: {},
 });

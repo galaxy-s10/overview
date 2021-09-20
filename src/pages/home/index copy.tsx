@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react';
 import { setLocale, getLocale, getIntl, FormattedMessage } from 'umi';
 
+/**
+ * i8n国际化
+ * #warn: 使用antd的时候，可能会报：Warning: The current popular language does not exist, please check the locales folder
+ * 需要在locales文件夹下添加一个zh-CN.ts。
+ */
+
 export default function Home() {
   console.log(getIntl().formatMessage({ id: 'button.save' }));
   // console.log(getIntl().formatMessage({ id: 'user.age' }));
