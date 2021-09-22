@@ -1,5 +1,6 @@
 import { defineConfig } from 'umi';
-
+import routes from './routes';
+import proxy from './proxy';
 export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
@@ -11,6 +12,8 @@ export default defineConfig({
     baseNavigator: true,
     baseSeparator: '-',
   },
-  // routes: [{ path: '/', component: '@/pages/index' }],
+  // layout: {},
+  routes,
+  proxy: proxy.dev,
   fastRefresh: {},
 });

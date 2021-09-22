@@ -1,8 +1,8 @@
 import styles from './index.scss';
-import gobalStore from '../../store';
+import globalStore from '../../store';
 
 const UpdateMobx = function () {
-  const { user, setUserToken } = gobalStore;
+  const { user, setUserToken } = globalStore;
   function updateToken() {
     console.log('setUserToken');
     setUserToken('jwttoken111');

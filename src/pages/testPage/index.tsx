@@ -2,10 +2,10 @@ import { memo } from 'react';
 import { observer } from 'mobx-react';
 
 import styles from './index.scss';
-import gobalStore from '../../store';
+import globalStore from '../../store';
 
 const TestPageDemo = function () {
-  const { user, buyCar } = gobalStore;
+  const { user, buyCar } = globalStore;
 
   return (
     <div className={styles.testPageWrap}>

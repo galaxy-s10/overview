@@ -1,11 +1,11 @@
 import { observer } from 'mobx-react';
-import gobalStore from '../../store';
+import globalStore from '../../store';
 
 import styles from './index.scss';
 
 const Mobx1 = (props: any) => {
   const { store } = props;
-  const { user, buyCar } = gobalStore;
+  const { user, buyCar } = globalStore;
   return (
     <div className={styles.mobxOneWrap}>
       mobxOne页面
