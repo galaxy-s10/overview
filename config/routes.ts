@@ -2,6 +2,20 @@ import Home from '../src/pages/home';
 
 export const defaultRoutes = [
   {
+    path: '/home',
+    exact: true,
+    meta: { title: '控制台' },
+    open: false,
+    component: './home',
+  },
+  {
+    path: '/test',
+    exact: true,
+    layout: false,
+    component: './mobxContext',
+    meta: { title: 'mobxContext' },
+  },
+  {
     path: '/dashboard',
     exact: true,
     meta: { title: '控制台' },
@@ -37,7 +51,7 @@ export default [
   {
     // exact: true, //不能设置exact:true，否则会导致匹配不到defaultRoutes
     path: '/',
-    component: '@/layouts/index',
+    // component: '@/layouts/index',
     // wrappers: ['./Authorized'],
     routes: [...defaultRoutes],
   },
@@ -48,5 +62,6 @@ export default [
     component: './login',
     meta: { title: '登录' },
   },
+
   // ...defaultRoutes,
 ];

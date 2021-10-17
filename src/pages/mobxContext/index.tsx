@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useState, useContext } from 'react';
 import { observer } from 'mobx-react';
 // import ThemeStore from '../../store/theme';
 // import GlobalStore from '../../store/index';
@@ -7,9 +7,9 @@ import Toolbar from './Toolbar';
 import { Button } from 'antd';
 
 const ThemeCpt = function () {
-  console.log('ThemeCptThemeCpt', ThemeStore());
-  const { Light, Dark, Theme } = ThemeStore();
-  const { theme, setTheme } = GlobalStore;
+  const { Light } = ThemeStore();
+  const { theme, setTheme } = GlobalStore();
+  console.log('ThemeCpt当前的mobx状态：', GlobalStore(), ThemeStore());
 
   function setLightTheme() {
     console.log('修改light主题色');
@@ -42,4 +42,5 @@ const ThemeCpt = function () {
     </div>
   );
 };
+// export default memo(ThemeCpt);
 export default memo(observer(ThemeCpt));

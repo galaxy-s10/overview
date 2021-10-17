@@ -7,5 +7,5 @@ import { default as Theme } from './Theme';
 export const ThemeContext = createContext({
   Light,
   Dark,
-  Theme,
+  // Theme,
 });

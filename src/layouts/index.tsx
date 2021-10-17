@@ -11,7 +11,7 @@ import MobxContenxt from '../pages/mobxContext';
 import CacheModel from '../libs/cache';
 
 const Layout = function (props) {
-  console.log('Layout重新渲染', props);
+  console.log('Layout重新渲染', props, props.location.pathname);
 
   if (props.location.pathname == '/login') {
     return <Login></Login>;

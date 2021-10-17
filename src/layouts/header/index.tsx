@@ -16,7 +16,6 @@ const Breadcrumbs = withBreadcrumbs(routes)(({ breadcrumbs }) => {
   return (
     <span>
       {breadcrumbs.map((breadcrumb, index) => {
-        console.log(breadcrumb, '--');
         return (
           <span key={breadcrumb.key}>
             <span>{breadcrumb.meta?.title}</span>

@@ -39,9 +39,12 @@
     "@umijs/fabric": "^2.8.0",
     "@umijs/preset-react": "1.x",
     "@umijs/test": "^3.5.17",
+    "file-loader": "^6.2.0",
+    "image-webpack-loader": "^8.0.1",
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.0",
     "typescript": "^4.1.2",
+    "url-loader": "^4.1.1",
     "yorkie": "^2.0.0"
   }
 }

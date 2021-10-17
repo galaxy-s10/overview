@@ -19,7 +19,10 @@ class globalStore {
     this.theme = theme;
   };
 }
-export default new globalStore();
+// export default new globalStore();
+
+import GlobalStore from './global/index';
+export default GlobalStore;
 
 // import _UserStore from './user/index';
 // export const UserStore = _UserStore;
