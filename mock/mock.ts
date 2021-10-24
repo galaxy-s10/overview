@@ -157,3 +157,5 @@ export const slotList = [
   'https://rec.4funvideo.com/u/3131e557-ed30-4c15-90f8-a5fcd26b231f-Clothe_Tops_R_Up.png',
   'https://rec.4funvideo.com/u/8587dca0-ec6b-4610-8360-294c208235fc-Clothe_Tops.png',
 ];
+
+export const aa = [];

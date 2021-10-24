@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { useMount } from 'ahooks';
+import { history } from 'umi';
 import Header from './header/index';
 import SideBar from './sidebar/index';
 import Content from './content/index';
@@ -8,23 +9,28 @@ import { LayoutWraper } from './style';
 import Login from '../pages/login';
 import ReactContext from '../pages/reactContext';
 import MobxContenxt from '../pages/mobxContext';
+import Dashboard from '../pages/dashboard';
 import CacheModel from '../libs/cache';
 
 const Layout = function (props) {
   console.log('Layout重新渲染', props, props.location.pathname);
-
-  if (props.location.pathname == '/login') {
+  if (props.location.pathname === '/') {
+    history.push('/dashboard');
+  }
+  if (props.location.pathname === '/login') {
     return <Login></Login>;
   }
-  if (props.location.pathname == '/test') {
+  if (props.location.pathname === '/test') {
     return <ReactContext></ReactContext>;
-  } else if (props.location.pathname == '/test1') {
+  }
+  if (props.location.pathname === '/test1') {
     return <MobxContenxt></MobxContenxt>;
   }
 
   useMount(() => {
     console.log('layout渲染完成');
   });
+
   return (
     <LayoutWraper>
       <SideBar />

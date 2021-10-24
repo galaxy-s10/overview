@@ -15,7 +15,7 @@ const Home = function () {
 
   function delFriend2(item) {
     setMyFriends((res) => {
-      let res1 = res.filter((v) => v.id != item.id);
+      const res1 = res.filter((v) => v.id != item.id);
       return res1;
     });
   }
@@ -26,9 +26,9 @@ const Home = function () {
     // arrClone.push(item);
     // console.log('arrClone', JSON.stringify(arrClone), 2);
     // setMyFriends(arrClone);
-    //解决：
+    // 解决：
     setMyFriends((res) => {
-      let arrClone = [...res];
+      const arrClone = [...res];
       console.log(JSON.stringify(arrClone), 1);
       arrClone.push(item);
       console.log(JSON.stringify(arrClone), 2);
@@ -50,12 +50,12 @@ const Home = function () {
 
   useEffect(() => {
     console.log('home生命周期');
-    let a = require.context('../../../public/u/', true);
+    const a = require.context('../../../public/u/', true);
 
     a.keys().forEach((k) => {
       // console.log(k);
       console.log(k.slice(2));
-      let imgName = k.slice(2);
+      const imgName = k.slice(2);
       imgList.push(imgName);
     });
   }, []);
@@ -72,13 +72,11 @@ const Home = function () {
     <div>
       Home页面
       <button onClick={() => handleClick()}>handleClick</button>
-      {myFriends.map((item) => {
-        return (
-          <div key={item.id}>
-            {item.id}:{item.name}
-          </div>
-        );
-      })}
+      {myFriends.map((item) => (
+        <div key={item.id}>
+          {item.id}:{item.name}
+        </div>
+      ))}
       <hr />
       <hr />
       <hr />
@@ -87,9 +85,9 @@ const Home = function () {
         imgList.map((v) => {
           return <img key={v} src={'/u/' + v} alt="" />;
         })} */}
-      {slotList.map((v, index) => {
+      {/* {slotList.map((v, index) => {
         return <img key={index} src={v} alt="" />;
-      })}
+      })} */}
       {/* <img
         src={require('https://rec.4funvideo.com/u/22c6ba6d-26f6-4f49-8ced-729a177915d9-Skin_Face_Hair_Front.png')}
         alt=""

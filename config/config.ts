@@ -1,6 +1,8 @@
 import { defineConfig } from 'umi';
+import ESLintPlugin from 'eslint-webpack-plugin';
 import routes from './routes';
 import proxy from './proxy';
+
 export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
@@ -17,6 +19,7 @@ export default defineConfig({
   proxy: proxy.dev,
   fastRefresh: {},
   chainWebpack(config, { env, webpack, createCSSRule }) {
+    config.plugin('eslint-webpack-plugin').use(new ESLintPlugin({}));
     config.module
       .rule('miniimage')
       .use('file-loader')
@@ -26,19 +29,19 @@ export default defineConfig({
           progressive: true,
         },
         // optipng.enabled: false will disable optipng
-        // optipng: {
-        //   enabled: false,
-        // },
+        optipng: {
+          enabled: false,
+        },
         pngquant: {
           quality: [0.65, 0.9],
           speed: 4,
         },
-        // gifsicle: {
-        //   interlaced: false,
-        // },
-        // // the webp option will enable WEBP
+        gifsicle: {
+          interlaced: false,
+        },
+        // the webp option will enable WEBP
         webp: {
-          quality: 75, //这个会对webp图片进行压缩？
+          quality: 75, // 这个会对webp图片进行压缩？
         },
       });
 
@@ -46,7 +49,7 @@ export default defineConfig({
       .rule('images')
       .test(/\.(png|jpe?g|gif|webp|ico)(\?.*)?$/)
       .use('url-loader')
-      .before('miniimage')
+      // .before('miniimage')
       .loader(require.resolve('url-loader'))
       .options({
         limit: false,

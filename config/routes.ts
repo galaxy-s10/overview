@@ -1,5 +1,3 @@
-import Home from '../src/pages/home';
-
 export const defaultRoutes = [
   {
     path: '/home',
@@ -51,7 +49,7 @@ export default [
   {
     // exact: true, //不能设置exact:true，否则会导致匹配不到defaultRoutes
     path: '/',
-    // component: '@/layouts/index',
+    component: '@/layouts/index',
     // wrappers: ['./Authorized'],
     routes: [...defaultRoutes],
   },
