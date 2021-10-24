@@ -19,7 +19,9 @@ export default defineConfig({
   proxy: proxy.dev,
   fastRefresh: {},
   chainWebpack(config, { env, webpack, createCSSRule }) {
-    config.plugin('eslint-webpack-plugin').use(new ESLintPlugin({}));
+    config
+      .plugin('eslint-webpack-plugin')
+      .use(new ESLintPlugin({ extensions: ['js', 'jsx', 'ts', 'tsx'] }));
     config.module
       .rule('miniimage')
       .use('file-loader')

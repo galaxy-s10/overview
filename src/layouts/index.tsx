@@ -9,7 +9,6 @@ import { LayoutWraper } from './style';
 import Login from '../pages/login';
 import ReactContext from '../pages/reactContext';
 import MobxContenxt from '../pages/mobxContext';
-import Dashboard from '../pages/dashboard';
 import CacheModel from '../libs/cache';
 
 const Layout = function (props) {
@@ -30,6 +29,8 @@ const Layout = function (props) {
   useMount(() => {
     console.log('layout渲染完成');
   });
+
+  const cpt1 = <Footer></Footer>;
 
   return (
     <LayoutWraper>

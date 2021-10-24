@@ -8,7 +8,9 @@
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
   },
-  "gitHooks": {},
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
   "lint-staged": {
     "*.{js,jsx,less,md,json}": [
       "prettier --write"
@@ -19,26 +21,21 @@
   },
   "dependencies": {
     "@ant-design/pro-layout": "^6.5.0",
-    "@umijs/plugin-sass": "^1.1.1",
-    "ahooks": "^2.10.9",
-    "axios": "^0.21.4",
+    "ahooks": "^2.10.11",
+    "axios": "^0.23.0",
     "classnames": "^2.3.1",
-    "mobx": "^6.3.3",
+    "mobx": "^6.3.5",
     "mobx-react": "^7.2.0",
-    "mobx-react-lite": "^3.2.1",
     "react": "17.x",
     "react-dom": "17.x",
-    "react-router-breadcrumbs-hoc": "^4.0.1",
-    "redux": "^4.1.1",
-    "styled-components": "^5.3.1",
-    "umi": "^3.5.17"
+    "styled-components": "^5.3.3",
+    "umi": "^3.5.20"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "@umijs/fabric": "^2.8.0",
     "@umijs/preset-react": "1.x",
-    "@umijs/test": "^3.5.17",
+    "@umijs/test": "^3.5.20",
     "eslint": "^8.1.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.25.2",
