@@ -1,12 +1,12 @@
 import { useState, memo } from 'react';
+import { Redirect } from 'umi';
 import Login from './login';
 import CacheModel from '../libs/cache';
 import { getUserInfo } from './login/server';
 import { UserStore } from '../store/index';
-import { Redirect } from 'umi';
 
 const AuthCpt = function (props) {
-  let [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   const { setUserInfo } = UserStore();
   console.log('开始鉴权');
   const token = CacheModel.getStorageExt('token');
@@ -24,10 +24,9 @@ const AuthCpt = function (props) {
   if (isLogin) {
     console.log('登录了');
     return <div>{props.children}</div>;
-  } else {
-    console.log('未登录');
-    return <Login></Login>;
-    // return <Redirect to="/login"></Redirect>;
   }
+  console.log('未登录');
+  return <Login></Login>;
+  // return <Redirect to="/login"></Redirect>;
 };
 export default memo(AuthCpt);

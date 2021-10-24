@@ -1,31 +1,27 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Menu, Dropdown } from 'antd';
 import { MenuFoldOutlined, DownOutlined } from '@ant-design/icons';
-import { HeaderWraper } from './style';
-import { UserStore } from '../../store/index';
 import withBreadcrumbs from 'react-router-breadcrumbs-hoc';
-import { defaultRoutes as routes } from '../../../config/routes';
-import CacheModel from '../../libs/cache';
 import { history } from 'umi';
 import { observer } from 'mobx-react';
+import { HeaderWraper } from './style';
+import { UserStore } from '../../store/index';
+import { defaultRoutes as routes } from '../../../config/routes';
+import CacheModel from '../../libs/cache';
 
 /**
  * 面包屑导航栏
  */
-const Breadcrumbs = withBreadcrumbs(routes)(({ breadcrumbs }) => {
-  return (
-    <span>
-      {breadcrumbs.map((breadcrumb, index) => {
-        return (
-          <span key={breadcrumb.key}>
-            <span>{breadcrumb.meta?.title}</span>
-            {index < breadcrumbs.length - 1 && <i> / </i>}
-          </span>
-        );
-      })}
-    </span>
-  );
-});
+const Breadcrumbs = withBreadcrumbs(routes)(({ breadcrumbs }) => (
+  <span>
+    {breadcrumbs.map((breadcrumb, index) => (
+      <span key={breadcrumb.key}>
+        <span>{breadcrumb.meta?.title}</span>
+        {index < breadcrumbs.length - 1 && <i> / </i>}
+      </span>
+    ))}
+  </span>
+));
 
 const Header = function (props) {
   console.log('header重新渲染', UserStore());

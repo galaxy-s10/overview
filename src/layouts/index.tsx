@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { useMount } from 'ahooks';
 import { history } from 'umi';
 import Header from './header/index';

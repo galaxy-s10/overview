@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 const Backend = function () {
   return <div>backend页面</div>;

@@ -1,9 +1,9 @@
-import { useEffect, useState, memo } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { slotList } from '../../../mock/mock';
 /**
  * useState异步更新
  */
-
+const a = 12214;
 const Home = function () {
   const [myFriends, setMyFriends] = useState([
     { id: 1, name: 'zhangsan' },
@@ -15,7 +15,7 @@ const Home = function () {
 
   function delFriend2(item) {
     setMyFriends((res) => {
-      const res1 = res.filter((v) => v.id != item.id);
+      const res1 = res.filter((v) => v.id !== item.id);
       return res1;
     });
   }
@@ -50,14 +50,14 @@ const Home = function () {
 
   useEffect(() => {
     console.log('home生命周期');
-    const a = require.context('../../../public/u/', true);
+    // const a = require.context('../../../public/', true);
 
-    a.keys().forEach((k) => {
-      // console.log(k);
-      console.log(k.slice(2));
-      const imgName = k.slice(2);
-      imgList.push(imgName);
-    });
+    // a.keys().forEach((k) => {
+    //   // console.log(k);
+    //   console.log(k.slice(2));
+    //   const imgName = k.slice(2);
+    //   imgList.push(imgName);
+    // });
   }, []);
 
   useEffect(() => {

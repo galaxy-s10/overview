@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import styles from './index.scss';
+
 const Footer = function (props) {
   const { history } = props;
 

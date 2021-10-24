@@ -13,20 +13,20 @@ const Home = function () {
 
   function delFriend2(item) {
     setMyFriends((res) => {
-      let res1 = res.filter((v) => v.id != item.id);
+      const res1 = res.filter((v) => v.id !== item.id);
       return res1;
     });
   }
 
   function addFriend3(item) {
-    let arrClone = [...myFriends];
+    const arrClone = [...myFriends];
     console.log('arrClone', JSON.stringify(arrClone));
     arrClone.push(item);
     console.log('arrClone', JSON.stringify(arrClone));
     setMyFriends(arrClone);
   }
 
-  //点击后最终结果只会加进去了zhaoliu
+  // 点击后最终结果只会加进去了zhaoliu
   function handleClick() {
     console.log('handleClick');
     addFriend3({ id: 5, name: 'shengqi' });
@@ -42,13 +42,11 @@ const Home = function () {
     <div>
       Home页面
       <button onClick={() => handleClick()}>handleClick</button>
-      {myFriends.map((item) => {
-        return (
-          <div key={item.id}>
-            {item.id}:{item.name}
-          </div>
-        );
-      })}
+      {myFriends.map((item) => (
+        <div key={item.id}>
+          {item.id}:{item.name}
+        </div>
+      ))}
     </div>
   );
 };

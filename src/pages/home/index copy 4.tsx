@@ -13,23 +13,23 @@ const Home = function () {
 
   function delFriend2(item) {
     setMyFriends((res) => {
-      let res1 = res.filter((v) => v.id != item.id);
+      const res1 = res.filter((v) => v.id !== item.id);
       return res1;
     });
   }
 
   function addFriend3(origin, item) {
-    let arrClone = [...origin];
+    const arrClone = [...origin];
     console.log('arrClone', JSON.stringify(arrClone));
     arrClone.push(item);
     console.log('arrClone', JSON.stringify(arrClone));
     setMyFriends(arrClone);
   }
 
-  //最终还是加进去了zhaoliu
+  // 最终还是加进去了zhaoliu
   function handleClick() {
     console.log('handleClick');
-    let _clone = [...myFriends];
+    const _clone = [...myFriends];
     addFriend3(_clone, { id: 5, name: 'shengqi' });
     addFriend3(_clone, { id: 4, name: 'zhaoliu' });
     // delFriend2({ id: 1 });
@@ -43,13 +43,11 @@ const Home = function () {
     <div>
       Home页面
       <button onClick={() => handleClick()}>handleClick</button>
-      {myFriends.map((item) => {
-        return (
-          <div key={item.id}>
-            {item.id}:{item.name}
-          </div>
-        );
-      })}
+      {myFriends.map((item) => (
+        <div key={item.id}>
+          {item.id}:{item.name}
+        </div>
+      ))}
     </div>
   );
 };

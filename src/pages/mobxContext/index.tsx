@@ -2,9 +2,9 @@ import { memo, useState, useContext } from 'react';
 import { observer } from 'mobx-react';
 // import ThemeStore from '../../store/theme';
 // import GlobalStore from '../../store/index';
+import { Button } from 'antd';
 import GlobalStore, { ThemeStore } from '../../store/index';
 import Toolbar from './Toolbar';
-import { Button } from 'antd';
 
 const ThemeCpt = function () {
   const { Light } = ThemeStore();

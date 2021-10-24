@@ -4,11 +4,14 @@ class Theme {
   constructor() {
     makeAutoObservable(this);
   }
+
   current = 'light';
+
   light = {
     foreground: 'white',
     background: '#448ef7',
   };
+
   dark = {
     foreground: 'white',
     background: 'gray',

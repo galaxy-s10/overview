@@ -12,6 +12,7 @@ class CacheModel {
       throw new Error('缓存失败');
     }
   };
+
   /**
    * 设置缓存以及过期时间
    * @param {*} key
@@ -20,15 +21,15 @@ class CacheModel {
    */
   setStorageExt = (key, value, expires) => {
     console.log('设置缓存以及过期时间', key, value, expires);
-    let params = { key, value, expires };
-    expires = parseInt(expires) || false;
+    const params = { key, value, expires };
+    expires = parseInt(expires, 10) || false;
     // let timestamp = Date.parse(new Date());
-    let timestamp = new Date().getTime();
+    const timestamp = new Date().getTime();
     // console.log(timestamp)
     if (!expires) {
       throw new Error('请传入过期时间');
     }
-    let assignParams = Object.assign(params, { startTime: timestamp });
+    const assignParams = Object.assign(params, { startTime: timestamp });
     try {
       console.log(key, assignParams);
       localStorage.setItem(key, JSON.stringify(assignParams));
@@ -42,35 +43,31 @@ class CacheModel {
    * @param {*} key
    */
   getStorageExt = (key) => {
-    let storage = JSON.parse(localStorage.getItem(key));
-    let nowTimestamp = new Date().getTime();
+    const storage = JSON.parse(localStorage.getItem(key));
+    const nowTimestamp = new Date().getTime();
     if (storage) {
       // 当前时间戳大于开始的时间加上过期时间，代表还没过期
-      let data =
+      const data =
         nowTimestamp >= storage.startTime + storage.expires
           ? this.clearStorage(key)
           : storage.value;
       return data;
-    } else {
-      return null;
     }
+    return null;
   };
+
   /**
    *
    *获取缓存
    * @param {*} key
    */
-  getStorage = (key) => {
-    return localStorage.getItem(key);
-  };
+  getStorage = (key) => localStorage.getItem(key);
 
   /**
    * 清除特定缓存
    * @param {*} key
    */
-  clearStorage = (key) => {
-    return localStorage.removeItem(key);
-  };
+  clearStorage = (key) => localStorage.removeItem(key);
 }
 
 export default new CacheModel();

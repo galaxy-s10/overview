@@ -1,10 +1,10 @@
-import React, { memo, useState } from 'react';
+import { memo, useState } from 'react';
 // import { withRouter } from 'react-router-dom';
 import { DownOutlined } from '@ant-design/icons';
-import { SideBarWraper } from './style';
-import { defaultRoutes as routes } from '../../../config/routes';
 import classNames from 'classnames';
 import { history } from 'umi';
+import { SideBarWraper } from './style';
+import { defaultRoutes as routes } from '../../../config/routes';
 import globalStore from '../../store/index';
 
 const SideBar = function (props) {
@@ -28,27 +28,25 @@ const SideBar = function (props) {
   }
   const SideItem = function (routes) {
     if (!routes) return undefined;
-    return routes.map((route, index) => {
-      return (
-        <div
-          className="side-bar-item"
-          key={index}
-          onClick={(e) => goPage(e, route)}
-        >
-          <span> {route.meta && route.meta.title}</span>
-          {route.routes && (
-            <DownOutlined
-              className={classNames('downIcon', { isOpen: route.open })}
-            />
-          )}
-          {route.routes && route.routes.length && (
-            <ul style={{ display: route.open ? 'block' : 'none' }}>
-              {SideItem(route.routes)}
-            </ul>
-          )}
-        </div>
-      );
-    });
+    return routes.map((route, index) => (
+      <div
+        className="side-bar-item"
+        key={index}
+        onClick={(e) => goPage(e, route)}
+      >
+        <span> {route.meta && route.meta.title}</span>
+        {route.routes && (
+          <DownOutlined
+            className={classNames('downIcon', { isOpen: route.open })}
+          />
+        )}
+        {route.routes && route.routes.length && (
+          <ul style={{ display: route.open ? 'block' : 'none' }}>
+            {SideItem(route.routes)}
+          </ul>
+        )}
+      </div>
+    ));
   };
   return (
     <SideBarWraper>

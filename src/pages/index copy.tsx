@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { observer } from 'mobx-react';
-import styles from './index.less'; //umi默认支持less
+import styles from './index.less'; // umi默认支持less
 import globalStore from '../store';
 
 import TestPage from './testPage';
@@ -14,13 +14,11 @@ const Index = () => {
     <div className={styles.indexWrap}>
       <span className={styles.title}>title:pages下的Index页面</span>
       <ul>
-        {Object.keys(user).map((item) => {
-          return (
-            <li key={item}>
-              {item}:{user[item]}
-            </li>
-          );
-        })}
+        {Object.keys(user).map((item) => (
+          <li key={item}>
+            {item}:{user[item]}
+          </li>
+        ))}
       </ul>
       <TestPage />
       <MobxOne store={globalStore} />
@@ -29,4 +27,4 @@ const Index = () => {
   );
 };
 // export default Index;
-export default memo(observer(Index)); //observer包裹 + 使用memo，正确写法
+export default memo(observer(Index)); // observer包裹 + 使用memo，正确写法

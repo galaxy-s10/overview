@@ -1,7 +1,7 @@
 import type { AxiosResponse, AxiosError } from 'axios';
 import axios from 'axios';
-import cache from '@/libs/cache';
 import { message } from 'antd';
+import cache from '@/libs/cache';
 
 const service = axios.create({
   // baseURL: myUrl,
@@ -13,7 +13,7 @@ service.interceptors.request.use(
   (config) => {
     const token = cache.getStorageExt('token');
     if (token) {
-      config.headers.Authorization = 'Bearer ' + token;
+      config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
@@ -25,9 +25,7 @@ service.interceptors.request.use(
 
 // 响应拦截
 service.interceptors.response.use(
-  (response: AxiosResponse) => {
-    return response.data;
-  },
+  (response: AxiosResponse) => response.data,
   (error: AxiosError) => {
     console.log('响应拦截', error);
     // 如果没有响应信息
@@ -42,21 +40,23 @@ service.interceptors.response.use(
     // 403权限不足
     // 404未找到
     const whiteList = ['400', '401', '403', '404'];
-    if (status == 401) {
-      // if (status == 401 || status == 403) {
+    if (status === 401) {
+      // if (status === 401 || status === 403) {
       cache.clearStorage('token');
       message.error({
-        content: status + '：' + data.message,
+        content: `${status}：${data.message}`,
       });
       return Promise.reject(data);
-    } else if (status == 403) {
+    }
+    if (status === 403) {
       message.error({
-        content: status + '：' + data.message,
+        content: `${status}：${data.message}`,
       });
       return Promise.reject(data);
-    } else if (status == 400) {
+    }
+    if (status === 400) {
       message.error({
-        content: status + '：' + data.message,
+        content: `${status}：${data.message}`,
       });
       return Promise.reject(data);
     }

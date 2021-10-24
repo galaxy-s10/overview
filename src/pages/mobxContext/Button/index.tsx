@@ -13,8 +13,8 @@ const Button = function (props) {
   return (
     <ButtonWraper
       style={{
-        backgroundColor: theme == 'light' ? Light.background : Dark.background,
-        color: theme == 'light' ? Light.foreground : Dark.foreground,
+        backgroundColor: theme === 'light' ? Light.background : Dark.background,
+        color: theme === 'light' ? Light.foreground : Dark.foreground,
       }}
     >
       Toolbar组件里的Button组件

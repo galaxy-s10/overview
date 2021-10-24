@@ -25,14 +25,23 @@ class User {
   }
 
   token: userInfo['token'] = null;
+
   remember: userInfo['remember'] = false; // 七天内免登
+
   roles: userInfo['roles'] = [];
+
   auth: userInfo['auth'] = [];
+
   username: userInfo['username'] = null;
+
   id: userInfo['id'] = null;
+
   status: userInfo['status'] = null;
+
   avatar: userInfo['avatar'] = null;
+
   title: userInfo['title'] = null;
+
   addRoutes: userInfo['addRoutes'] = [];
 
   setUserToken = (token: userInfo['token'], exp: userInfo['exp']) => {

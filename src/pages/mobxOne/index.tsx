@@ -10,13 +10,11 @@ const Mobx1 = (props: any) => {
     <div className={styles.mobxOneWrap}>
       mobxOne页面
       <ul>
-        {Object.keys(user).map((item) => {
-          return (
-            <li key={item}>
-              {item}:{user[item]}
-            </li>
-          );
-        })}
+        {Object.keys(user).map((item) => (
+          <li key={item}>
+            {item}:{user[item]}
+          </li>
+        ))}
       </ul>
     </div>
   );

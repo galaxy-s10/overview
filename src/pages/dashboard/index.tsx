@@ -1,16 +1,16 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Button } from 'antd';
-import { UserStore } from '../../store';
 import { useModel } from 'umi';
+import { UserStore } from '../../store';
+
 const Dashboard = function (props) {
-  const { history } = props;
   console.log(UserStore);
   const { username, avatar, title } = UserStore();
   const initState = useModel('@@initialState');
   console.log(initState, '====');
   return (
     <div>
-      Dashboard页面
+      Dashboard页面1fdgfdsg
       <div>
         <div>用户名：{username}</div>
         <div>头像：{avatar}</div>
@@ -32,4 +32,4 @@ const Dashboard = function (props) {
     </div>
   );
 };
-export default Dashboard;
+export default memo(Dashboard);

@@ -1,8 +1,9 @@
+import { history } from 'umi';
 import { getUserInfo } from './pages/login/server';
 import Login from './pages/login';
 import CacheModel from './libs/cache';
 import { UserStore } from './store';
-import { history } from 'umi';
+
 export const locale = {
   // getLocale() {
   //   console.log('我是app.tsx');

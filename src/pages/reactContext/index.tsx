@@ -1,7 +1,6 @@
-import { useState, useContext } from 'react';
-import { memo } from 'react';
-import { ThemeContext, themes } from './context';
+import { useState, useContext, memo } from 'react';
 import { Button } from 'antd';
+import { ThemeContext, themes } from './context';
 import Toolbar from './Toolbar';
 // import { ThemeContext } from '../../store/theme/context';
 

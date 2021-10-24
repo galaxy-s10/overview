@@ -1,8 +1,8 @@
-import React, { memo, useState } from 'react';
+import { memo, useState } from 'react';
 import { history, Redirect } from 'umi';
 import { Form, Card, Button, Checkbox, Input, message } from 'antd';
-import { LoginWrap } from './style';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { LoginWrap } from './style';
 import { login, getUserInfo } from './server';
 import type { loginInterface } from './interface';
 import { UserStore } from '../../store';
@@ -12,7 +12,7 @@ const Login = function (props) {
   const { setUserInfo, setUserToken } = UserStore();
   async function onFinish(userInfo: loginInterface) {
     setLoading(true);
-    userInfo.exp = userInfo.exp ? 24 * 7 : 24; //token默认24小时过期，选择七天免登陆即7*24小时过期
+    userInfo.exp = userInfo.exp ? 24 * 7 : 24; // token默认24小时过期，选择七天免登陆即7*24小时过期
     try {
       const res = await login(userInfo);
       setUserToken(res.token, userInfo.exp * 60 * 60);

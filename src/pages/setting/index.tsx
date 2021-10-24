@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 // import { renderRoutes } from 'react-router-config';
 import { withRouter } from 'react-router-dom';
 

@@ -1,4 +1,5 @@
 import { Effect, Reducer, Subscription } from 'umi';
+
 export interface IagentInfo {
   name: string;
   phoneNum: string;

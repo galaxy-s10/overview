@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 const Theme = function () {
   return <div>Theme页面</div>;
