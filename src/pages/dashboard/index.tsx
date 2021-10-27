@@ -2,15 +2,21 @@ import { memo } from 'react';
 import { Button } from 'antd';
 import { useModel } from 'umi';
 import { UserStore } from '../../store';
+import Toast from '@/components/toast';
 
 const Dashboard = function (props) {
   console.log(UserStore);
   const { username, avatar, title } = UserStore();
   const initState = useModel('@@initialState');
   console.log(initState, '====');
+  // console.log(Toast.aaa());
+  console.log(Toast, Toast.success('xxxx', 1), 888);
+  setTimeout(() => {
+    Toast.fail('agasdgs', 4);
+  }, 1000);
   return (
     <div>
-      Dashboard页面1fdgfdsg
+      Dashboard页面
       <div>
         <div>用户名：{username}</div>
         <div>头像：{avatar}</div>

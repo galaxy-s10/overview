@@ -4,7 +4,8 @@ module.exports = {
     commonjs: true,
   },
   extends: [
-    'airbnb-base', // airbnb的eslint规范，indent：2，即一个缩进两个空格，qutoes：single，即单引号，max-len：一行100
+    'airbnb-base', // eslint-config-airbnb-base
+    'plugin:prettier/recommended', // eslint-config-prettier + eslint-plugin-prettier
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -15,16 +16,13 @@ module.exports = {
   overrides: [
     {
       files: ['*.ts', '*tsx'],
-      parser: '@typescript-eslint/parser', // 默认安装的@umijs/fabric有这个插件
+      parser: '@typescript-eslint/parser', // @typescript-eslint/parser
       parserOptions: {
-        // parser: 'vue-eslint-parser',
-        // ecmaVersion: 12,
-        // parser: '@typescript-eslint/parser',
         ecmaFeatures: {
           jsx: true,
         },
       },
-      plugins: ['@typescript-eslint'],
+      plugins: ['@typescript-eslint'], // @typescript-eslint/eslint-plugin
       extends: ['plugin:@typescript-eslint/recommended'],
       rules: {},
     },
