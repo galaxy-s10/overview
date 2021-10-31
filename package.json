@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "umi dev",
-    "lint-fix": "eslint --config ./.eslintrc.js --fix . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint --config ./.eslintrc.js --report-unused-disable-directives --fix . --ext .js,.jsx,.ts,.tsx",
     "build": "umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",

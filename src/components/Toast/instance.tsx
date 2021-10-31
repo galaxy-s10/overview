@@ -24,48 +24,6 @@ class Toast extends PureComponent {
     maskStyle: undefined,
   };
 
-  /**
-   * 挂载
-   * 当组件实例被创建并插入 DOM 中时，其生命周期调用顺序如下：
-   * constructor()
-   * static getDerivedStateFromProps()
-   * render()
-   * componentDidMount()
-   */
-
-  /**
-   * 更新
-   * 当组件的 props 或 state 发生变化时会触发更新。组件更新的生命周期调用顺序如下：
-   * static getDerivedStateFromProps()
-   * shouldComponentUpdate()
-   * render()
-   * getSnapshotBeforeUpdate()
-   * componentDidUpdate()
-   */
-
-  /**
-   * 卸载
-   * 当组件从 DOM 中移除时会调用如下方法：
-   * componentWillUnmount()
-   */
-
-  componentDidMount() {
-    console.log('执行了组件的componentDidMount方法', this.state);
-  }
-
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(
-      '执行了组件的componentDidUpdate方法',
-      prevProps,
-      prevState,
-      snapshot
-    );
-  }
-
-  componentWillUnmount() {
-    console.log('调用了Cpn的componentWillUnmount方法');
-  }
-
   render() {
     console.log('Toast组件render', this.props, this.state);
     const { visible, content, icon, maskClassName, maskClickable, maskStyle } =
@@ -132,133 +90,93 @@ class Toast extends PureComponent {
     );
   }
 }
-
+let defaultInstanceProp: IInstanceProp = {
+  duration: 2000, // 持续显示两秒
+  maskClickable: false, // 不可点击遮罩
+  maskClassName: undefined,
+  maskStyle: undefined,
+};
 Toast.newInstance = function (props, cb) {
   console.log('Toast实例化', props, cb);
-  const defaultInstanceProp: IInstanceProp = {
-    duration: 2000, // 持续显示两秒
-    maskClickable: false, // 不可点击遮罩
-    maskClassName: undefined,
-    maskStyle: undefined,
-  };
+  // const newInstanceProp = { ...defaultInstanceProp, ...props };
   const messageEl = document.createElement('div');
   document.body.appendChild(messageEl);
   // @ts-ignore
   const _toast: ICallBackProp = {};
-
-  // const clear = function () {
-  //   console.log('清除Toast', _vm);
-  //   // ReactDOM.unmountComponentAtNode(messageEl);
-  //   // if (messageEl.parentNode) {
-  //   //   messageEl.parentNode.removeChild(messageEl);
-  //   // }
-  // };
-  let quequ: {
+  let queue: {
     uid: number;
     immediately: boolean;
     duration?: number;
-    quequcb: any;
+    onClose: any;
   }[] = [];
   let id = 0;
   function ref(vm) {
-    ['success', 'info', 'fail', 'loading'].forEach((type) => {
+    ['success', 'info', 'fail', 'loading', 'show'].forEach((type) => {
       // @ts-ignore
       _toast[type] = (props: IUserProp) => {
-        console.log('执行', type, uid, quequ);
+        console.log('开始', type);
         const userProp = { visible: true, ...props };
         const res = {
+          // ...newInstanceProp,
           ...defaultInstanceProp,
+          ...props,
           ...userProp,
-          icon: type,
+          icon: type === 'show' ? null : type,
         };
-        console.log('quequ[quequ.length - 1]', quequ[quequ.length - 1]);
-        // vm.setState(res);
-        console.log('resresres', res);
         const uid = ++id;
-        const quequcb = (props) => {
-          console.log('huidiao', quequ, props);
-          console.log('.....', quequ);
-          vm.setState({ visible: false });
-          props.onClose && props.onClose();
-        };
         const item = {
           uid,
           immediately: false,
           duration: res.duration,
-          type: res.icon,
-          quequcb,
           onClose: res.onClose,
         };
-        console.log(quequ, '队列22');
-        const a = quequ[0];
-        console.log(item, '====++++++');
-        if (quequ.length < 1) {
-          quequ.push(item);
-          console.log('==2==', quequ, a);
-          // a?.quequcb({ ...item });
+        if (queue.length < 1) {
+          queue.push(item);
         } else {
-          // quequ.forEach((item, index, arr) => {
-          // const popres = quequ.shift();
-          // console.log(popres, '///');
-          quequ.forEach((item) => {
+          queue.forEach((item) => {
             item.immediately = true;
           });
           item.immediately = false;
-          quequ.push(item);
-
-          // popres.quequcb(popres);
-          // });
-          // a?.quequcb(a.duration);
+          queue.push(item);
         }
-
-        console.log('((((((object))))))', quequ);
-
-        quequ.forEach((vv) => {
+        console.log(res, '结果');
+        queue.forEach((vv) => {
           if (vv.immediately) {
-            console.log('不是最后一个，立即执行，然后删掉该item', vv);
-            vm.setState({ visible: false });
-            vv.onClose();
-            quequ = quequ.filter((v) => v.uid !== vv.uid);
-            console.log(quequ, '0))((');
+            vm.setState({ visible: false }); // 1,关闭该toast
+            vv.onClose(); // 2,立即执行该toast回调
+            // 3,执行完成后，从队列里面删除掉这个toast
+            queue = queue.filter((item) => item.uid !== vv.uid);
           } else {
             vm.setState(res);
-            console.log('最后一个', item);
             setTimeout(() => {
-              const res = quequ.find((item) => item.uid == vv.uid);
-              console.log('找到了吗', res);
+              // 从队列里找这个toast
+              const res = queue.find((item) => item.uid === vv.uid);
               if (res) {
-                vm.setState({ visible: false });
-                res.onClose();
-              } else {
-                console.log('没了啊');
+                // 队列里面有这个toast的话，则执行这个toast的回调
+                vm.setState({ visible: false }); // 关闭该toast
+                res.onClose(); // 执行这个toast的回调
               }
-            }, item.duration);
+            }, vv.duration);
           }
         });
-        // quequ = [];
-        console.log('----', quequ[0]);
       };
     });
-    _toast.show = (props: IUserProp) => {
-      console.log('执行show');
-      const userProp = { visible: true, ...props };
-      const res = {
-        icon: null,
-        ...defaultInstanceProp,
-        ...userProp,
-      };
-      console.log(res, '00');
-      vm.setState(res);
-      res.duration &&
-        setTimeout(() => {
-          vm.setState({ visible: false });
-          props.onClose && props.onClose();
-        }, res.duration);
-    };
+    /**
+     * 清除Toast
+     */
     _toast.clear = () => {
+      console.log(666, '清除toast', queue);
       vm.setState({ visible: false });
+      queue.forEach((vv) => {
+        vv.onClose();
+      });
+      queue = [];
     };
     _toast.component = vm;
+    _toast.config = (v) => {
+      console.log(6664, 'config修改', v);
+      defaultInstanceProp = v;
+    };
     cb(_toast);
   }
   ReactDOM.render(<Toast {...props} ref={ref} />, messageEl);

@@ -20,7 +20,7 @@ service.interceptors.request.use(
   (error: AxiosError) => {
     console.log(error);
     return Promise.reject(error);
-  },
+  }
 );
 
 // 响应拦截
@@ -61,7 +61,7 @@ service.interceptors.response.use(
       return Promise.reject(data);
     }
     return Promise.reject(data);
-  },
+  }
 );
 
 export default service;
