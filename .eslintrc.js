@@ -1,33 +1,45 @@
 module.exports = {
-  env: {
-    browser: true,
-    commonjs: true,
-  },
+  env: { browser: true, commonjs: true },
   extends: [
     'airbnb-base', // eslint-config-airbnb-base
     'plugin:prettier/recommended', // eslint-config-prettier + eslint-plugin-prettier
   ],
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-  },
+  parserOptions: { ecmaFeatures: { jsx: true } },
   plugins: [],
   overrides: [
     {
       files: ['*.ts', '*tsx'],
       parser: '@typescript-eslint/parser', // @typescript-eslint/parser
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
+      parserOptions: { ecmaFeatures: { jsx: true } },
       plugins: ['@typescript-eslint'], // @typescript-eslint/eslint-plugin
       extends: ['plugin:@typescript-eslint/recommended'],
-      rules: {},
+      rules: {
+        '@typescript-eslint/ban-ts-comment': 1, // 禁止使用@ts-<directive>
+      },
     },
   ],
+  // =====1111111111111111=====================================================
   rules: {
+    // 'function-paren-newline': ['error', { minItems: 3 }],
+    'object-curly-newline': [
+      'off',
+      {
+        // ObjectExpression: 'always', // 对象字面量的配置
+        ObjectExpression: {
+          multiline: true, // 如果属性内部或属性之间有换行符，则需要换行符。它优先级比minProperties高
+          // minProperties: 3,
+          // consistent: true, // （默认）要求两个大括号或两者都不直接包含换行符。
+        }, // 对象字面量的配置
+        ObjectPattern: {
+          multiline: true,
+          // minProperties: 3,
+        }, // 解构赋值对象模式的配置
+        // ObjectPattern: 'never', // 解构赋值对象模式的配置
+        // ImportDeclaration: 'never', // 命名导入的配置
+        // ExportDeclaration: 'never', // 命名导出的配置
+      },
+    ],
+    // 'max-len': ['error', { code: 80 }],
     'no-await-in-loop': 1, // 禁止await在循环内部
     'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
     'no-restricted-syntax': [

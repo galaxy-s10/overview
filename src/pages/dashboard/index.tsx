@@ -1,19 +1,58 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import { Button } from 'antd';
 import { useModel } from 'umi';
 import { UserStore } from '../../store';
-import Toast from '@/components/toast';
+import ToastTest from '@/components/mobile/Toast';
 
 const Dashboard = function (props) {
-  console.log(UserStore);
+  // console.log(UserStore);
   const { username, avatar, title } = UserStore();
   const initState = useModel('@@initialState');
-  console.log(initState, '====');
-  // console.log(Toast.aaa());
-  console.log(Toast, Toast.success('xxxx', 1), 888);
-  setTimeout(() => {
-    Toast.fail('agasdgs', 4);
-  }, 1000);
+
+  useEffect(() => {
+    let sss = null;
+    ToastTest.newInstance(
+      {
+        duration: 2, // 持续时间
+      },
+      (res) => {
+        sss = res;
+        // res.fail({ content: 12 });
+        console.log('实例化成功', res, 6777);
+        res.success({
+          content: '1423',
+          duration: 1000,
+          onClose: () => {
+            console.log('-successsuccesssuccess');
+          },
+        });
+        setTimeout(() => {
+          res.fail({
+            content: 'sdgdfhs',
+            duration: 2000,
+            onClose: () => {
+              console.log('---failfailfail');
+            },
+          });
+        }, 100);
+
+        // console.log(res.show('textxxx', 0));
+        // res.info({
+        //   icon: <b>23523</b>,
+        //   content: <a href="">gsgsd</a>,
+        //   onClose: () => {
+        //     console.log('--infoinfoinfo--');
+        //   },
+        //   maskClickable: true,
+        //   duration: 1000,
+        // });
+        // console.log(res.loading('loading...', 0));
+      }
+    );
+    setTimeout(() => {
+      // sss.clear();
+    }, 1000);
+  }, []);
   return (
     <div>
       Dashboard页面
