@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "start": "umi dev",
-    "lint-fix": "eslint --config ./.eslintrc.js --report-unused-disable-directives --fix . --ext .js,.jsx,.ts,.tsx",
+    "lint": "eslint --config ./.eslintrc.js . --ext .js,.jsx,.ts,.tsx",
+    "lint-fix": "eslint --config ./.eslintrc.js --fix . --ext .js,.jsx,.ts,.tsx",
     "build": "umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
@@ -26,6 +27,8 @@
     "ahooks": "^2.10.11",
     "axios": "^0.23.0",
     "classnames": "^2.3.1",
+    "highlight.js": "^11.3.1",
+    "marked": "^3.0.8",
     "mobx": "^6.3.5",
     "mobx-react": "^7.2.0",
     "react": "17.x",

@@ -1,0 +1,38 @@
+.markdown-body .highlight pre, .markdown-body pre {
+  border-radius: 3px;
+  position: relative;
+}
+
+.markdown-body pre:after {
+  background-color: #f6bf4f;
+  left: 25px;
+}
+
+.markdown-body pre:after, .markdown-body pre:before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 6px;
+}
+
+.markdown-body pre:before {
+  background-color: #ed6a5e;
+  left: 9px;
+}
+
+.markdown-body code:before {
+  content: '';
+  background-color: #65ca56;
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  left: 42px;
+  top: 6px;
+}
+
+.markdown-body .highlight pre, .markdown-body pre {
+  padding: 20px 16px 16px 16px !important;
+}

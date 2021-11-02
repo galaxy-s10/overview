@@ -1,5 +1,5 @@
 import ToastInstance from './instance';
-import { ICallBackProp, IInstanceProp } from './interface';
+import { ICallBackProp } from './interface';
 
 let Toast: ICallBackProp = {};
 ToastInstance.newInstance({}, (res) => {

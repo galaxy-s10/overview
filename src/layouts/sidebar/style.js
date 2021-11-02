@@ -2,26 +2,56 @@ import styled from 'styled-components';
 
 export const SideBarWraper = styled.div`
   height: 100vh;
-  width: 200px;
-  background-color: #535a6c;
+  border-right: 1px solid #f0f0f0;
+  width: 300px;
+  overflow: hidden;
+  background-color: #ffffff;
+  :hover {
+    overflow-y: auto;
+  }
   .side-bar-title {
+    width: 280px;
     height: 60px;
-    color: white;
+    color: black;
     font-size: 24px;
     line-height: 60px;
     text-align: center;
+    .side-bar-logo {
+      cursor: pointer;
+      width: 60%;
+      display: flex;
+      margin: 0 auto;
+      align-items: center;
+      justify-content: space-around;
+    }
   }
-  .side-bar-item {
+  > .side-bar-item {
     position: relative;
     /* height: 50px; */
-    padding: 14px 24px;
-    color: rgba(255, 255, 255, 0.7);
+    width: 280px;
+    display: inline-block;
+    color: #222121;
+    padding: 10px;
     /* line-height: 50px; */
     /* text-align: center; */
-    cursor: pointer;
-
-    &:hover {
-      color: white;
+    transition: all 0.3s ease;
+    > .side-bar-item-title {
+      display: inline-block;
+      width: 100%;
+      color: #00000073;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .side-bar-item-list {
+      .side-bar-item {
+        padding: 10px;
+        margin: 14px;
+        &:hover {
+          cursor: pointer;
+          color: #448ef7;
+        }
+      }
     }
     .downIcon {
       position: absolute;

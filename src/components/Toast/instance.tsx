@@ -121,7 +121,8 @@ Toast.newInstance = function (props, cb) {
           ...defaultInstanceProp,
           ...props,
           ...userProp,
-          icon: type === 'show' ? null : type,
+          // icon: type,
+          icon: type === 'show' ? props.icon : type,
         };
         const uid = ++id;
         const item = {
@@ -143,7 +144,7 @@ Toast.newInstance = function (props, cb) {
         queue.forEach((vv) => {
           if (vv.immediately) {
             vm.setState({ visible: false }); // 1,关闭该toast
-            vv.onClose(); // 2,立即执行该toast回调
+            vv.onClose && vv.onClose(); // 2,立即执行该toast回调
             // 3,执行完成后，从队列里面删除掉这个toast
             queue = queue.filter((item) => item.uid !== vv.uid);
           } else {
@@ -154,7 +155,7 @@ Toast.newInstance = function (props, cb) {
               if (res) {
                 // 队列里面有这个toast的话，则执行这个toast的回调
                 vm.setState({ visible: false }); // 关闭该toast
-                res.onClose(); // 执行这个toast的回调
+                vv.onClose && vv.onClose(); // 执行这个toast的回调
               }
             }, vv.duration);
           }
@@ -168,7 +169,7 @@ Toast.newInstance = function (props, cb) {
       console.log(666, '清除toast', queue);
       vm.setState({ visible: false });
       queue.forEach((vv) => {
-        vv.onClose();
+        vv.onClose && vv.onClose();
       });
       queue = [];
     };

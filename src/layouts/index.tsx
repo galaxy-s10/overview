@@ -30,15 +30,13 @@ const Layout = function (props) {
     console.log('layout渲染完成');
   });
 
-  const cpt1 = <Footer></Footer>;
-
   return (
     <LayoutWraper>
       <SideBar />
       <div className="layout-right">
         <Header />
         <Content routes={props.children} />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </LayoutWraper>
   );

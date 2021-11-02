@@ -4,6 +4,10 @@ import routes from './routes';
 import proxy from './proxy';
 
 export default defineConfig({
+  base: '/billd-react/',
+  history: { type: 'hash' },
+  // outputPath: 'billd-react',
+  publicPath: '/billd-react/',
   nodeModulesTransform: {
     type: 'none',
   },
@@ -18,7 +22,7 @@ export default defineConfig({
   routes,
   proxy: proxy.dev,
   fastRefresh: {},
-  mfsu: {},
+  // mfsu: {},
   chainWebpack(config, { env, webpack, createCSSRule }) {
     config
       .plugin('eslint-webpack-plugin') // 注意：如果检测到有错误信息，控制台会打印出来，而且不会继续往下执行！得解决掉错误才会继续执行
