@@ -1,0 +1,14 @@
+:root {
+  --color-btn-1: red;
+  --color-btn-2: green;
+  --color-btn-3: blue;
+}
+
+.colorfulDiv1 {
+  background-color: var(--color-btn-1);
+  color: rebeccapurple;
+}
+
+.colorfulDiv2 {
+  background-color: var(--color-btn-4, skyblue);
+}

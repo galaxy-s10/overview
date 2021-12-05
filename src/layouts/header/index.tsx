@@ -1,12 +1,11 @@
 import { memo, useState } from 'react';
-import { Menu, Dropdown } from 'antd';
-import { MenuFoldOutlined, DownOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
 import withBreadcrumbs from 'react-router-breadcrumbs-hoc';
 import { history } from 'umi';
 import { observer } from 'mobx-react';
-import { HeaderWraper } from './style';
-import { UserStore } from '../../store/index';
-import { defaultRoutes, componentRoutes } from '../../../config/routes';
+import HeaderWraper from './style';
+// import { UserStore } from '../../store/index';
+import { sidebarRoutes } from '../../../config/routes';
 import CacheModel from '../../libs/cache';
 
 /**
@@ -23,10 +22,10 @@ import CacheModel from '../../libs/cache';
 //   </span>
 // ));
 
-const Header = function (props) {
-  console.log('header重新渲染', UserStore());
-  const { username, avatar, setUserToken } = UserStore();
-  const [routes, setRoutes] = useState([...defaultRoutes, ...componentRoutes]);
+const Header = function () {
+  // console.log('header重新渲染', UserStore());
+  // const { username, avatar, setUserToken } = UserStore();
+  const [routes, setRoutes] = useState(sidebarRoutes);
   const renderBreadcrumbs = (routes) => {
     const res = withBreadcrumbs(routes)(({ breadcrumbs }) => (
       <span>

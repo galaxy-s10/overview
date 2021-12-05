@@ -25,26 +25,22 @@ class Toast extends PureComponent {
   };
 
   render() {
-    console.log('Toast组件render', this.props, this.state);
     const { visible, content, icon, maskClassName, maskClickable, maskStyle } =
       this.state;
+    console.log('======', visible, content);
     const renderMask = ({
       maskClickable,
       maskClassName,
       maskStyle,
-    }: IInstanceProp): React.ReactNode => {
-      console.log('renderMask渲染了', this.state);
-      return (
-        <div
-          className={`${maskClassName || style.ToastMask} ${
-            maskClickable ? style.AllowClickAble : style.UnClickAble
-          }`}
-          style={maskStyle}
-        ></div>
-      );
-    };
+    }: IInstanceProp): React.ReactNode => (
+      <div
+        className={`${maskClassName || style.ToastMask} ${
+          maskClickable ? style.AllowClickAble : style.UnClickAble
+        }`}
+        style={maskStyle}
+      ></div>
+    );
     const renderIcon = function (icon: IUserProp['icon']) {
-      console.log('renderIcon渲染了');
       let res = icon;
       if (icon) {
         if (['success', 'info', 'fail', 'loading'].indexOf(icon) !== -1) {
@@ -60,7 +56,6 @@ class Toast extends PureComponent {
       return res;
     };
     const renderContent = function (content: IUserProp['content']) {
-      console.log('renderContent渲染了');
       if (typeof content === 'string') {
         /**
          * 如果style.Text是undefined,由于``模板字符串的原因,最终会返回'undefined'
@@ -97,7 +92,6 @@ let defaultInstanceProp: IInstanceProp = {
   maskStyle: undefined,
 };
 Toast.newInstance = function (props, cb) {
-  console.log('Toast实例化', props, cb);
   // const newInstanceProp = { ...defaultInstanceProp, ...props };
   const messageEl = document.createElement('div');
   document.body.appendChild(messageEl);
@@ -113,16 +107,31 @@ Toast.newInstance = function (props, cb) {
   function ref(vm) {
     ['success', 'info', 'fail', 'loading', 'show'].forEach((type) => {
       // @ts-ignore
-      _toast[type] = (props: IUserProp) => {
-        console.log('开始', type);
-        const userProp = { visible: true, ...props };
+      // _toast[type] = (props: IUserProp) => {
+      _toast[type] = ({
+        content = '',
+        icon,
+        duration = defaultInstanceProp.duration,
+        maskClassName = defaultInstanceProp.maskClassName,
+        maskClickable = defaultInstanceProp.maskClickable,
+        maskStyle = defaultInstanceProp.maskStyle,
+        onClose,
+      }: IUserProp) => {
+        const userProp = {
+          visible: true,
+          content,
+          duration,
+          maskClassName,
+          maskClickable,
+          maskStyle,
+          onClose,
+        };
         const res = {
           // ...newInstanceProp,
-          ...defaultInstanceProp,
-          ...props,
+          // ...props,
           ...userProp,
           // icon: type,
-          icon: type === 'show' ? props.icon : type,
+          icon: type === 'show' ? icon : type,
         };
         const uid = ++id;
         const item = {
@@ -140,7 +149,6 @@ Toast.newInstance = function (props, cb) {
           item.immediately = false;
           queue.push(item);
         }
-        console.log(res, '结果');
         queue.forEach((vv) => {
           if (vv.immediately) {
             vm.setState({ visible: false }); // 1,关闭该toast
@@ -166,7 +174,6 @@ Toast.newInstance = function (props, cb) {
      * 清除Toast
      */
     _toast.clear = () => {
-      console.log(666, '清除toast', queue);
       vm.setState({ visible: false });
       queue.forEach((vv) => {
         vv.onClose && vv.onClose();
@@ -175,7 +182,6 @@ Toast.newInstance = function (props, cb) {
     };
     _toast.component = vm;
     _toast.config = (v) => {
-      console.log(6664, 'config修改', v);
       defaultInstanceProp = v;
     };
     cb(_toast);

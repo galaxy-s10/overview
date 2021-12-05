@@ -14,12 +14,12 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  top: 6px;
+  top: 10px;
 }
 
 .markdown-body pre:before {
   background-color: #ed6a5e;
-  left: 9px;
+  left: 10px;
 }
 
 .markdown-body code:before {
@@ -29,10 +29,10 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  left: 42px;
-  top: 6px;
+  left: 40px;
+  top: 10px;
 }
 
 .markdown-body .highlight pre, .markdown-body pre {
-  padding: 20px 16px 16px 16px !important;
+  padding: 24px 16px 16px 16px !important;
 }

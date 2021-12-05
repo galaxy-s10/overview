@@ -8,7 +8,7 @@ export interface IInstanceProp {
 
 // 实例化后的回调函数的参数(暴露给用户的接口)
 export interface IUserProp extends IInstanceProp {
-  content: React.ReactNode; // Toast 文本内容
+  content?: React.ReactNode; // Toast 文本内容
   icon?: 'info' | 'success' | 'fail' | 'loading' | React.ReactNode; // Toast 图标
   onClose?: () => void; // 关闭Toast时的回调
 }
@@ -19,14 +19,18 @@ export interface IToastState extends IUserProp {
 
 // Toast组件暴露给用户的方法。
 export interface ICallBackProp {
+  /** Toast组件实例 */
   component: any;
+  /** Toast组件默认配置 */
   config: ({
     maskClassName,
     maskClickable,
     maskStyle,
     duration,
   }: IInstanceProp) => void;
+  /** 清除所有Toast */
   clear: () => void;
+  /** 显示Toast */
   show: ({
     content,
     icon,

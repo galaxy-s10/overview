@@ -39,6 +39,19 @@ module.exports = {
         // ExportDeclaration: 'never', // 命名导出的配置
       },
     ],
+    // 如果prettier的规则有冲突，可以在这里写，这里的优先级最高。
+    // 项目里的.prettierrc.js文件里面的规则，vscode是会读取这个文件进行格式化的
+    /**
+     * vscode保存的时候做了什么操作?
+     * 1,读取项目里的.prettierrc.js文件,然后
+     */
+    'prettier/prettier': [
+      'error',
+      { jsxBracketSameLine: false },
+      // {
+      //   usePrettierrc: false,
+      // },
+    ],
     // 'max-len': ['error', { code: 80 }],
     'no-await-in-loop': 1, // 禁止await在循环内部
     'class-methods-use-this': 0, // 类方法如果不使用this的话会报错
@@ -57,12 +70,12 @@ module.exports = {
     'arrow-body-style': [1, 'as-needed'], // 在可以省略的地方强制不使用大括号（默认）
     'global-require': 1, // 此规则要求所有调用require()都在模块的顶层，类似于 ES6import和export语句，也只能在顶层发生。
     'no-shadow': 0,
-    'import/prefer-default-export': 1, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
+    'import/prefer-default-export': 0, // 当模块只有一个导出时，更喜欢使用默认导出而不是命名导出。
     'no-undef': 0, // https://github.com/typescript-eslint/typescript-eslint/issues/2528#issuecomment-689369395
     'no-param-reassign': 0,
     'func-names': 0, // 不能是匿名函数
     'import/no-extraneous-dependencies': 0, // 开发/生产依赖混乱
-    'spaced-comment': 2, // 此规则将在注释//或开始后强制执行间距的一致性/*
+    'spaced-comment': 2, // 一些风格指南要求或禁止在首字母//或/*注释后立即出现空格。//或之后的空白/*使评论中的文本更容易阅读。另一方面，注释掉代码更容易，而不必在//or之后放置空格/*。
     'no-underscore-dangle': 0, // Unexpected dangling '_' in '_xxx'
     'import/extensions': 0, // 省略导入源路径中的文件扩展名
     'import/no-unresolved': 0, // 导入资源的时候没有后缀会报这个错，这里关掉他
