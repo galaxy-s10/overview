@@ -1,7 +1,6 @@
 .virtual-list {
   &-wrapper {
     overflow-y: scroll;
-    height: 200px;
     background-color: pink;
   }
 
@@ -12,6 +11,8 @@
   }
   &-item {
     height: 40px;
+    border: 1px blue solid;
+    background-color: red;
     text-align: center;
     line-height: 40px;
   }

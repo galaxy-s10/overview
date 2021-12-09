@@ -45,7 +45,22 @@ $light-primary-color: var(--light-primary-color, '#845cc3');
 }
 
 .color-text1 {
-  @include colorText('#f64f59, #c471ed, #12c2e9');
+  font-size: 50px;
+  animation: text-flash-move1 2.5s infinite ease;
+
+  @include colorText(
+    $color:
+      '#E02020 0%, #FA6400 17%, #F7B500 33%, #6DD400 50%, #0091FF 67%, #6236FF 83%, #B620E0 100%',
+    $position: '270deg'
+  );
+  @keyframes text-flash-move1 {
+    0% {
+      filter: hue-rotate(0deg);
+    }
+    100% {
+      filter: hue-rotate(100deg);
+    }
+  }
 }
 .color-text2 {
   @include colorText('#009fff, #ec2f4b', 'to bottom');

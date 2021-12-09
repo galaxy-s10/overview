@@ -90,7 +90,7 @@
 }
 
 // 颜色文字
-@mixin colorText($color, $position: 'to left') {
+@mixin colorText($color: '#8a2387, #e94057, #f27121', $position: 'to left') {
   position: relative;
   // display: inline-block;
   overflow: hidden;

@@ -6,7 +6,7 @@ import cache from '@/libs/cache';
 NProgress.configure({ showSpinner: false }); // NProgress Configuration
 
 const service = axios.create({
-  baseURL: 'http://localhost:3100',
+  // baseURL: 'http://localhost:3100',
   timeout: 5000,
 });
 
@@ -53,44 +53,26 @@ service.interceptors.response.use(
       whiteList.indexOf(`${error.response.status}`) === -1
     ) {
       console.log(error.response);
-      Message.error({
-        content: `${error.response.status}：${error.response.data}`,
-      });
-      return;
+      return Promise.reject();
     }
     if (error.response) {
       // if (error.response && error.response.status != 500) {
       if (error.response.status === 401) {
         // if (error.response.status == 401 || error.response.status == 403) {
         cache.clearStorage('token');
-        Message.error({
-          content: `${error.response.status}：${error.response.data.message}`,
-        });
         // 下面有个return，代表不会继续向下执行
         // 也就是说，如果网络请求报了401，有return，就不会继续执行axios，就不会返回reject
         // return "请求失败，axios执行到这里，直接返回return的数据（不走reject，因此axios错误不会被catch，会被then）"
         return Promise.reject(error.response.data);
       }
       if (error.response.status === 403) {
-        Message.error({
-          content: `${error.response.status}：${error.response.data.message}`,
-        });
-        // 如果只return,则会走then且没有值
-        // return
-        // 如果return后面有值,则会走then且有值
-        // return '000'
-        // 如果return一个promise.reject,则会走catch
         return Promise.reject(error.response.data);
       }
       if (error.response.status === 400) {
-        Message.error({
-          content: `${error.response.status}：${error.response.data.message}`,
-        });
         return Promise.reject(error.response.data);
       }
     }
-    return Promise.reject(error.response.data);
-    // return Promise.reject(error)
+    return Promise.reject(error.response);
   }
 );
 
