@@ -2,12 +2,19 @@ import { defineConfig } from 'umi';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import routes from './routes';
 import proxy from './proxy';
+export const APP_ENV = process.env.REACT_APP_ENV;
+const env = APP_ENV?.toLowerCase();
+
+export const appName = 'overview'; // 该appName要与jenkin任务名一致
+const outputStaticUrl = () => {
+  return `/${appName}/${env}/`;
+};
+const publicPath = outputStaticUrl();
 
 export default defineConfig({
-  // base: '/',
   history: { type: 'hash' },
-  // outputPath: 'billd-react',
-  // publicPath: '/',
+  publicPath,
+  base: publicPath,
   nodeModulesTransform: {
     type: 'none',
   },
