@@ -1,19 +1,11 @@
 ```typescript
-/**
- * 删除对象中值为: null, undefined, NaN, ''的属性
- */
-export const deleteNullObjectKey = (obj: object | null) => {
-  for (const key in obj) {
-    /**
-     * for in 在循环对象的属性时也会遍历原型链，所以当遍历多继承的对象时效率较低。
-     * 因此使用hasOwnProperty控制只遍历自身属性
-     */
-    if (obj.hasOwnProperty(key)) {
-      if ([null, undefined, NaN, ''].includes(obj[key])) {
-        delete obj[key];
-      }
+/** 删除对象中值为: null, undefined, NaN, ''的属性 */
+export const deleteNullObjectKey = (obj: any) => {
+  Object.keys(obj).forEach((key) => {
+    if ([null, undefined, NaN, ''].includes(obj[key])) {
+      delete obj[key];
     }
-  }
+  });
 };
 
 /**
@@ -22,7 +14,7 @@ export const deleteNullObjectKey = (obj: object | null) => {
  */
 export const judgeType = (obj: any): string => {
   const { toString } = Object.prototype;
-  const map: any = {
+  const map = {
     '[object Boolean]': 'boolean',
     '[object Number]': 'number',
     '[object String]': 'string',
@@ -34,14 +26,13 @@ export const judgeType = (obj: any): string => {
     '[object Null]': 'null',
     '[object Object]': 'object',
   };
+  // @ts-ignore
   return map[toString.call(obj)];
 };
 
 /**
  * myName转化为my-name
  * https://github.com/vueComponent/ant-design-vue/blob/HEAD/antd-tools/generator-types/src/utils.ts
- * @param  {string} input
- * @returns string
  */
 export const toKebabCase = (input: string): string =>
   input.replace(
@@ -88,18 +79,33 @@ export const getScrollBarSize = () => {
   return widthContained - widthScroll;
 };
 
-/**
- * 使用json进行深克隆
- */
-export const deepCloneByJson = (obj: object): object =>
+/** 使用json进行深克隆  */
+export const deepCloneByJson = <T>(obj: T): T =>
   JSON.parse(JSON.stringify(obj));
 
-/**
- * 判断字符串的开头和结尾是否有空格,
- * 有空格就返回true,否则返回false
- * @param value
- * @returns boolean
- */
+/** 手写深拷贝，解决循环引用 */
+export const deepClone = <T>(obj: T): T => {
+  function clone(obj: any, hash: WeakMap<object, any> | undefined) {
+    const newobj: any = Array.isArray(obj) ? [] : {};
+    hash = hash || new WeakMap();
+    if (hash.has(obj)) {
+      return hash.get(obj);
+    }
+    hash.set(obj, newobj);
+
+    Object.keys(obj).forEach((i) => {
+      if (obj[i] instanceof Object) {
+        newobj[i] = clone(obj[i], hash);
+      } else {
+        newobj[i] = obj[i];
+      }
+    });
+    return newobj;
+  }
+  return clone(obj, undefined);
+};
+
+/** 判断字符串的开头和结尾是否有空格，有空格就返回true，否则返回false */
 export const judgeStringSpace = (value: string): boolean => {
   const reg1 = /^\s+/g; // 匹配开头空格
   const reg2 = /\s+$/g; // 匹配结尾空格
@@ -110,6 +116,23 @@ export const judgeStringSpace = (value: string): boolean => {
 };
 
 /**
+ * 获取[min,max]之间的随机整数
+ * 例如：[10,30],[-21,32],[-100,-20]
+ */
+export const getRandomInt = (min: number, max: number) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
+/** 获取随机字符串 */
+export const randomString = (length: number): string => {
+  const str = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  let res = '';
+  for (let i = 0; i < length; i += 1) {
+    res += str.charAt(getRandomInt(0, str.length - 1));
+  }
+  return res;
+};
+
+/**
  * 时间戳转换成日期
  * 将new Date()或时间戳转换为："2020-10-01 12:24:03"
  * 不能传"2020-10-01",会转成"2020-10-01 08:00:00"
@@ -117,22 +140,20 @@ export const judgeStringSpace = (value: string): boolean => {
 export const formatTime = (v: string | number) => {
   const date = new Date(v);
   const y = date.getFullYear();
-  let m = date.getMonth() + 1;
+  let m: any = date.getMonth() + 1;
   m = m < 10 ? `0${m}` : m;
-  let d = date.getDate();
+  let d: any = date.getDate();
   d = d < 10 ? `0${d}` : d;
-  let h = date.getHours();
+  let h: any = date.getHours();
   h = h < 10 ? `0${h}` : h;
-  let minute = date.getMinutes();
-  let second = date.getSeconds();
+  let minute: any = date.getMinutes();
+  let second: any = date.getSeconds();
   minute = minute < 10 ? `0${minute}` : minute;
   second = second < 10 ? `0${second}` : second;
   return `${y}-${m}-${d} ${h}:${minute}:${second}`;
 };
 
-/**
- * 将内容复制到剪切板
- */
+/** 将内容复制到剪切板 */
 export const copyToClipBoard = (text: string): void => {
   const oInput = document.createElement('input');
   oInput.value = text;

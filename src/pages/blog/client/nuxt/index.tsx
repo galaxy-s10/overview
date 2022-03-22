@@ -7,7 +7,7 @@ export default function index() {
       <div>基于nuxt + elementui搭建的博客前台</div>
       <div>🎉🎉🎉</div>
       <div>
-        <a href="https://www.hsslive.cn/" target="_blank">
+        <a href="https://www.hsslive.cn" target="_blank">
           点我
         </a>
       </div>

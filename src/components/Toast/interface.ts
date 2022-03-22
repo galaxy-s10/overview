@@ -4,6 +4,7 @@ export interface IInstanceProp {
   maskClassName?: string; // Toast 遮罩类名
   maskClickable?: boolean; // 是否允许背景点击
   duration?: number; // 提示持续时间，若为 0 则不会自动关闭
+  maskClickCb?: () => void;
 }
 
 // 实例化后的回调函数的参数(暴露给用户的接口)
@@ -11,6 +12,7 @@ export interface IUserProp extends IInstanceProp {
   content?: React.ReactNode; // Toast 文本内容
   icon?: 'info' | 'success' | 'fail' | 'loading' | React.ReactNode; // Toast 图标
   onClose?: () => void; // 关闭Toast时的回调
+  maskClickCb?: () => void;
 }
 
 export interface IToastState extends IUserProp {

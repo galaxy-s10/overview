@@ -52,10 +52,10 @@ const ThemeSystem = () => {
   };
   useEffect(() => {
     console.log('==');
-    getThemeList().then((res) => {
-      console.log(res.result.rows[0]);
-      setTableData(res.result.rows);
-    });
+    // getThemeList().then((res) => {
+    //   console.log(res.result.rows[0]);
+    //   setTableData(res.result.rows);
+    // });
     // generatorCss(`
     //   :root{
     //     --color-btn-3:yellow;
@@ -66,9 +66,9 @@ const ThemeSystem = () => {
   return (
     <div>
       <h1>文案系统</h1>
-      <Table columns={columns} dataSource={tableData} />
+      {/* <Table columns={columns} dataSource={tableData} />
       <div className={styles.colorfulDiv1}>div1</div>
-      <div className={styles.colorfulDiv2}>div2</div>
+      <div className={styles.colorfulDiv2}>div2</div> */}
     </div>
   );
 };

@@ -3,15 +3,14 @@ import readme from './README.md';
 
 export default function index() {
   return (
-    <Wrap name="vue2组件" html={readme}>
-      <div>基于webpack5+gulp4构建的vue2.x组件库</div>
+    <Wrap name="vue3后台" html={readme}>
+      <div>基于vue3 + webpack5 + typescriipt搭建的博客后台</div>
       <div>🎉🎉🎉</div>
       <div>
-        <a href="http://project.hsslive.cn/billd-ui/" target="_blank">
+        <a href="https://admin.hsslive.cn" target="_blank">
           点我
         </a>
       </div>
-      <div>33</div>
     </Wrap>
   );
 }

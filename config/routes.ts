@@ -246,6 +246,11 @@ export const blogRoutes: IRoutes[] = [
             component: './blog/admin/vue2',
             meta: { title: 'vue2' },
           },
+          {
+            path: '/blog/admin/vue3',
+            component: './blog/admin/vue3',
+            meta: { title: 'vue3' },
+          },
         ],
       },
       {

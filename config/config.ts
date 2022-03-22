@@ -2,17 +2,12 @@ import { defineConfig } from 'umi';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import routes from './routes';
 import proxy from './proxy';
-export const APP_ENV = process.env.REACT_APP_ENV;
-const env = APP_ENV?.toLowerCase();
+import { outputStaticUrl } from './outputStaticUrl';
 
-export const appName = 'overview'; // 该appName要与jenkin任务名一致
-const outputStaticUrl = () => {
-  return `/${appName}/${env}/`;
-};
 const publicPath = outputStaticUrl();
 
 export default defineConfig({
-  history: { type: 'hash' },
+  history: { type: 'browser' },
   publicPath,
   base: publicPath,
   nodeModulesTransform: {

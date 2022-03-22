@@ -1,12 +1,13 @@
 import { PureComponent } from 'react';
 import ReactDOM from 'react-dom';
-import style from './index.scss';
+
 import base64List from './constance';
+import style from './index.scss';
 import {
   ICallBackProp,
+  IInstanceProp,
   IToastState,
   IUserProp,
-  IInstanceProp,
 } from './interface';
 
 class Toast extends PureComponent {
@@ -22,32 +23,45 @@ class Toast extends PureComponent {
     maskClickable: false,
     maskClassName: undefined,
     maskStyle: undefined,
+    maskClickCb: undefined,
   };
 
   render() {
-    const { visible, content, icon, maskClassName, maskClickable, maskStyle } =
-      this.state;
-    console.log('======', visible, content);
+    const {
+      visible,
+      content,
+      icon,
+      maskClassName,
+      maskClickable,
+      maskStyle,
+      maskClickCb,
+    } = this.state;
     const renderMask = ({
       maskClickable,
       maskClassName,
       maskStyle,
+      maskClickCb,
     }: IInstanceProp): React.ReactNode => (
       <div
         className={`${maskClassName || style.ToastMask} ${
           maskClickable ? style.AllowClickAble : style.UnClickAble
         }`}
         style={maskStyle}
+        onClick={() => {
+          maskClickCb && maskClickCb();
+        }}
       ></div>
     );
-    const renderIcon = function (icon: IUserProp['icon']) {
+    const renderIcon = (icon: IUserProp['icon']) => {
       let res = icon;
       if (icon) {
-        if (['success', 'info', 'fail', 'loading'].indexOf(icon) !== -1) {
+        if (
+          ['success', 'info', 'fail', 'loading'].indexOf(icon as string) !== -1
+        ) {
           res = (
             <img
               className={`${style[`Icon-${icon}`]}`}
-              src={base64List[icon]}
+              src={base64List[icon as string]}
               alt=""
             />
           );
@@ -55,7 +69,7 @@ class Toast extends PureComponent {
       }
       return res;
     };
-    const renderContent = function (content: IUserProp['content']) {
+    const renderContent = (content: IUserProp['content']) => {
       if (typeof content === 'string') {
         /**
          * 如果style.Text是undefined,由于``模板字符串的原因,最终会返回'undefined'
@@ -73,6 +87,7 @@ class Toast extends PureComponent {
             maskClassName,
             maskClickable,
             maskStyle,
+            maskClickCb,
           })}
           <div className={style.ToastWrap}>
             <div className={style.Toast}>
@@ -91,8 +106,7 @@ let defaultInstanceProp: IInstanceProp = {
   maskClassName: undefined,
   maskStyle: undefined,
 };
-Toast.newInstance = function (props, cb) {
-  // const newInstanceProp = { ...defaultInstanceProp, ...props };
+Toast.newInstance = (props, cb) => {
   const messageEl = document.createElement('div');
   document.body.appendChild(messageEl);
   // @ts-ignore
@@ -104,10 +118,10 @@ Toast.newInstance = function (props, cb) {
     onClose: any;
   }[] = [];
   let id = 0;
-  function ref(vm) {
-    ['success', 'info', 'fail', 'loading', 'show'].forEach((type) => {
+  function ref(vm: any) {
+    const type = ['success', 'info', 'fail', 'loading', 'show'];
+    type.forEach((type) => {
       // @ts-ignore
-      // _toast[type] = (props: IUserProp) => {
       _toast[type] = ({
         content = '',
         icon,
@@ -115,6 +129,7 @@ Toast.newInstance = function (props, cb) {
         maskClassName = defaultInstanceProp.maskClassName,
         maskClickable = defaultInstanceProp.maskClickable,
         maskStyle = defaultInstanceProp.maskStyle,
+        maskClickCb,
         onClose,
       }: IUserProp) => {
         const userProp = {
@@ -125,12 +140,10 @@ Toast.newInstance = function (props, cb) {
           maskClickable,
           maskStyle,
           onClose,
+          maskClickCb,
         };
         const res = {
-          // ...newInstanceProp,
-          // ...props,
           ...userProp,
-          // icon: type,
           icon: type === 'show' ? icon : type,
         };
         const uid = ++id;
@@ -170,9 +183,7 @@ Toast.newInstance = function (props, cb) {
         });
       };
     });
-    /**
-     * 清除Toast
-     */
+    /** 清除Toast */
     _toast.clear = () => {
       vm.setState({ visible: false });
       queue.forEach((vv) => {

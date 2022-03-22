@@ -14,7 +14,8 @@ module.exports = {
       plugins: ['@typescript-eslint'], // @typescript-eslint/eslint-plugin
       extends: ['plugin:@typescript-eslint/recommended'],
       rules: {
-        '@typescript-eslint/ban-ts-comment': 1, // 禁止使用@ts-<directive>
+        '@typescript-eslint/ban-ts-comment': 0, // 禁止使用@ts-<directive>
+        '@typescript-eslint/no-explicit-any': 0, // 禁止使用any类型
       },
     },
   ],
