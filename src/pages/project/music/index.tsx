@@ -6,7 +6,10 @@ export default function index() {
       <div>基于react仿写的网易云音乐官网</div>
       <div>🎉🎉🎉</div>
       <div>
-        <a href="https://www.hsslive.cn/music/" target="_blank">
+        <a
+          href="http://project.hsslive.cn/netease-cloud-music/"
+          target="_blank"
+        >
           点我
         </a>
       </div>
